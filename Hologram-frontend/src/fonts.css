@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "FS-Alvar-Bold";
+  src: url("/fonts/FS\ Alvar-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FS-Alvar-Regular";
+  src: url("/fonts/FS\ Alvar-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "FS-Alvar-Light";
+  src: url("/fonts/FS\ Alvar-Light.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+

@@ -7,23 +7,32 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "copy-mediapipe-assets": "cpx \"node_modules/@mediapipe/face_mesh/**/*\" public/mediapipe/face_mesh --preserve",
+    "postinstall": "npm run copy-mediapipe-assets"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.13",
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/control_utils": "^0.6.1675466023",
+    "@mediapipe/drawing_utils": "^0.3.1675466124",
+    "@mediapipe/face_detection": "^0.4.1646425229",
+    "@mediapipe/face_mesh": "^0.4.1633559619",
+    "@tailwindcss/vite": "^4.1.11",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "tailwindcss": "^4.1.13"
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.35.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
     "vite": "^7.1.6"
   }
 }

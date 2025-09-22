@@ -1,0 +1,58 @@
+/* src/Presence_Detection/PresenceDetection.css */
+.pd-container{
+  position: relative;
+  width: 640px;
+  height: 480px;
+  margin: 16px auto;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.pd-video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 640px;
+  height: 480px;
+  transform: scaleX(-1); /* video mirrored for natural preview (hidden usually) */
+  -webkit-transform: scaleX(-1);
+  object-fit: cover;
+}
+
+/* Canvas: do NOT mirror via CSS; we'll mirror drawing in JS so text remains readable */
+.pd-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 640px;
+  height: 480px;
+  pointer-events: none;
+  /* no transform here */
+}
+
+/* Small UI area (distance & controls) */
+.pd-ui {
+  width: 640px;
+  margin: 8px auto 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.pd-ui .left {
+  color: #fff;
+}
+
+.pd-ui .controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pd-ui button, .pd-ui input[type="range"] {
+  cursor: pointer;
+}
