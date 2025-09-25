@@ -1,12 +1,11 @@
 [
   {
-    "offersid": "PROM1235",
+    "offersid": "PROM-2223",
     "name": "Basic Plan",
     "type": "Prepaid",
     "description": [
-      "1GB Data for 1 Month",
-      "100 Minutes Talk Time"
+      "1GB Data for 1 Month"
     ],
-    "price": "5"
+    "price": "10"
   }
 ]

@@ -10,6 +10,7 @@ export default function FaceDistanceOnly({
   maxRange = 90,
   showDistance = false, // toggle calibration display
   holdTime = 3000,      // ms a user must stay in range to count as "present"
+  isVisible = false,    // video display style (usually hidden)
 }) {
   const videoRef = useRef(null);
   const faceMeshRef = useRef(null);
@@ -144,7 +145,9 @@ export default function FaceDistanceOnly({
   return (
     <div style={{ position: "relative" }}>
       {/* hidden video feed used as input only */}
-      <video ref={videoRef} playsInline muted style={{ display: "none" }} />
+      <video ref={videoRef} playsInline muted style={{ display: isVisible ? "block" : "none" }} />
+
+      
 
       {/* optional on-screen distance for calibration/testing */}
       {showDistance && (

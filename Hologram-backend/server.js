@@ -11,11 +11,14 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 const FILE_PATH = "./PromotionalData.json";
+const MESSAGES_FILE = "./Messages.json";
+
 const API_KEY = process.env.API_KEY || "ubaSecnirP";
 const allowedOrigins = process.env.CORS_ORIGINS?.split(",") || [];
 let screenSaverUrl =
   process.env.Fallback_Screen_Saver_URL ||
   "https://images.pexels.com/photos/3052361/pexels-photo-3052361.jpeg"; // fallback
+
 
 // ------------------- Security/Infra ------------------- //
 
@@ -64,7 +67,7 @@ function authenticate(req, res, next) {
 // ------------------- Validation Schema ------------------- //
 const offerSchema = Joi.object({
   offersid: Joi.string()
-    .pattern(/^PROM\d+$/)
+    .pattern(/^PROM-\d+$/)
     .required(),
   name: Joi.string().min(3).required(),
   type: Joi.string().required(),
@@ -175,16 +178,93 @@ app.get("/ScreenSaver", (req, res) => {
 // ---- UPDATE screen saver URL ----
 app.post("/ScreenSaver", (req, res) => {
   const { screenSaverUrl: url } = req.body;
+
   if (!url || typeof url !== "string") {
-    return res.status(400).json({ error: "Invalid URL format" });
+    return res.status(400).json({ error: "Invalid request: URL missing or not a string" });
   }
-  const urlPattern = /^(https?:\/\/[^\s]+)$/;
-  if (!urlPattern.test(url)) {
+
+  try {
+    // Encode spaces so the URL object can parse it
+    const safeUrl = url.replace(/ /g, "%20");
+    const parsedUrl = new URL(safeUrl);
+
+    // Optional: restrict to HTTPS + Azure Blob
+    if (parsedUrl.protocol !== "https:") {
+      return res.status(400).json({ error: "Only HTTPS URLs are allowed" });
+    }
+
+    // Save original input (with spaces) but validate via encoded
+    screenSaverUrl = url;
+
+    return res.json({
+      message: "Screen saver URL updated successfully",
+      screenSaverUrl,
+    });
+
+  } catch (err) {
     return res.status(400).json({ error: "Provided string is not a valid URL" });
   }
-  screenSaverUrl = url;
-  res.json({ message: "Screen saver URL updated successfully", screenSaverUrl });
 });
+
+// ------------------- Messages ------------------- //
+let messages = {};
+
+if (existsSync(MESSAGES_FILE)) {
+  messages = JSON.parse(readFileSync(MESSAGES_FILE, "utf-8"));
+} else {
+  messages = {
+    welcome: "Hello user!",
+    fallback: "Sorry, I didn’t get that.",
+  };
+  writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2));
+}
+
+// --------------------- GET all messages -------------------
+app.get("/messages", authenticate, (req, res) => {
+  res.json(messages);
+});
+
+// ---------------------------- PATCH a message -----------------
+
+app.patch("/messages", authenticate, (req, res) => {
+  const updates = req.body;
+
+  if (!updates || typeof updates !== "object") {
+    return res.status(400).json({ error: "Invalid request: body must be a JSON object" });
+  }
+
+  let updated = {};
+  let notFound = [];
+
+  // Iterate over updates
+  for (const key of Object.keys(updates)) {
+    if (messages.messages.hasOwnProperty(key)) {
+      messages.messages[key] = updates[key];
+      updated[key] = updates[key];
+    } else {
+      notFound.push(key);
+    }
+  }
+
+  writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2));
+
+  res.json({
+    message: "Bulk message update completed",
+    updated,
+    notFound,
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
 
 // ------------------- Start Server ------------------- //
 app

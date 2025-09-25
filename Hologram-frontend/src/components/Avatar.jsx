@@ -3,7 +3,7 @@ import React from "react";
 function Avatar() {
   return (
     <div className="avatar">
-      <img src="/path/to/avatar.jpg" alt="User Avatar" />
+      <iframe src="" frameborder="0"></iframe>
     </div>
   );
 }

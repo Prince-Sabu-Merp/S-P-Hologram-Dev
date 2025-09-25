@@ -1,0 +1,7 @@
+{
+  "messages": {
+    "welcome": "Hi Prince!",
+    "fallback": "Sorry",
+    "goodbye": "bye"
+  }
+}
