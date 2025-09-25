@@ -22,17 +22,17 @@ function App() {
       />
 
      
-      <ScreenSaver />
+      {/* <ScreenSaver /> */}
 
     
       {/* <InfoMessages
         className=""
-        messageHead="Welcome to Hologram"
+        messageHead="Hi Prince"
         messageBody="This is a sample message body."
       /> */}
 
       {/* If needed later */}
-      {/* <CradLayout /> */}
+      <CradLayout />
     </div>
   );
 }

@@ -16,7 +16,7 @@ function CardLayout() {
     bgColor="#2D13EA"
     textColor="text-white"
     planName="Vivek"
-    planType="Prepaid"
+    planType="Postpaid"
     description={["1TB Data for 1 Month", "Unlimited Talk Time"]}
     price="OMR 25"
   />
@@ -47,6 +47,15 @@ function CardLayout() {
     price="OMR 25"
   />
 
+
+<PromotionCard
+    bgColor="#FF7800"
+    textColor="text-white"
+    planName="Prince"
+    planType="Prepaid"
+    description={["1TB Data for 1 Month", "Unlimited Talk Time"]}
+    price="OMR 25"
+  />
   
   <div className="absolute bottom-[455px] left-[50px]">
     <LanguageSelector />

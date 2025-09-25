@@ -1,7 +1,7 @@
 {
   "messages": {
-    "welcome": "Hi Prince!",
+    "welcome": "Hi Good Morning",
     "fallback": "Sorry",
-    "goodbye": "bye"
+    "goodbye": "Bye"
   }
 }

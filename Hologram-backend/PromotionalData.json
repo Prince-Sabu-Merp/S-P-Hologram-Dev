@@ -7,5 +7,14 @@
       "1GB Data for 1 Month"
     ],
     "price": "10"
+  },
+  {
+    "offersid": "PROM-0218",
+    "name": "Baiti Fiber",
+    "type": "Fiber",
+    "description": [
+      "Double the speed with the same existing price! Uplift your Fiber speeds up to 2 Gbps!"
+    ],
+    "price": "100"
   }
 ]
