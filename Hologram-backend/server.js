@@ -8,6 +8,7 @@ import promotionalRoutes from "./routes/promotionalRoutes.js";
 import screenSaverRoutes from "./routes/screenSaverRoutes.js";
 import messageRoutes from "./routes/messageRoutes.js";
 import { authenticate } from "./middlewares/auth.js";
+import configurationRoutes from "./routes/configurationRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -42,6 +43,7 @@ app.get("/", (req, res) => res.send("✅ Backend Secure & Ready!"));
 app.use("/PromotionalData", authenticate, promotionalRoutes);
 app.use("/ScreenSaver", authenticate, screenSaverRoutes);
 app.use("/messages", authenticate, messageRoutes);
+app.use("/configuration", authenticate, configurationRoutes);
 
 // Start
 app.listen(PORT, () => console.log(`✅ Server running on ${PORT}`));
