@@ -1,43 +1,18 @@
-# -----------------------------
-# 1. Base Build Stage
-# -----------------------------
-FROM node:20-alpine AS builder
+# Use official Node.js image
+FROM node:18
 
 # Set working directory
 WORKDIR /usr/src/app
 
-# Install deps based on lockfile
+# Install dependencies
 COPY package*.json ./
-COPY package-lock.json* ./
+RUN npm install
 
-# Install all deps (prod + dev for build)
-RUN npm ci
-
-# Copy the rest of the source code
+# Copy rest of the backend code
 COPY . .
 
-# -----------------------------
-# 2. Production Runtime Stage
-# -----------------------------
-FROM node:20-alpine
-
-WORKDIR /usr/src/app
-
-# Copy only package and lock files for reproducibility
-COPY package*.json ./
-COPY package-lock.json* ./
-
-# Install only production dependencies (smaller image)
-RUN npm ci --omit=dev
-
-# Copy only required files from builder
-COPY --from=builder /usr/src/app ./
-
-# Environment
-ENV NODE_ENV=production
-
-# Expose app port
+# Expose backend port
 EXPOSE 3000
 
-# Default start command
-CMD ["node", "server.js"]
+# Start in dev mode
+CMD ["npm", "run", "dev"]

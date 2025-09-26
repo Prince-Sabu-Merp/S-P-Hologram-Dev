@@ -16,5 +16,23 @@
       "Double the speed with the same existing price! Uplift your Fiber speeds up to 2 Gbps!"
     ],
     "price": "100"
+  },
+  {
+    "offersid": "PROM-0306",
+    "name": "Baiti Fiber",
+    "type": "Fiber",
+    "description": [
+      "Double the speed with the same existing price! Uplift your Fiber speeds up to 2 Gbps!"
+    ],
+    "price": "500"
+  },
+  {
+    "offersid": "PROM-0307",
+    "name": "Baiti 5G",
+    "type": "5G",
+    "description": [
+      "Get free wifi mesh with new Baiti 5G offer!"
+    ],
+    "price": "200"
   }
 ]
